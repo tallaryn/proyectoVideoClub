@@ -129,4 +129,9 @@ public class Pelicula {
         return mayor18;
     }
 
+    public void setMayor18(boolean mayor18)
+    {
+        this.mayor18 = mayor18;
+    }
+
 }
