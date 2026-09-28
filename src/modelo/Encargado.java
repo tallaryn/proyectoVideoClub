@@ -49,7 +49,7 @@ public class Encargado extends Persona
     @Override
     public String identificarse()
     {
-        return "Rol: Encargado" +
+        return "\nRol: Encargado" +
         "\nNombre: " + getNombre() +
         "\nRut: "+ getRut() +
         "\nID de empleado: " + idEmpleado +
