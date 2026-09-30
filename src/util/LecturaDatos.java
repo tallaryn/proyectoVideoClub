@@ -75,6 +75,19 @@ public class LecturaDatos {
         }
         return idEmpleado;
     }
+    
+    public static boolean esNumero(String str) {
+        if (str == null || str.isEmpty()) {
+            return false;
+        }
+        try {
+            Integer.parseInt(str);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
+
 
     
 }

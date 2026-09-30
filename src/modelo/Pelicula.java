@@ -12,6 +12,8 @@ public class Pelicula {
     private int plazoEntrega; //en dias desde la fecha inicial, default en 0 (se actualiza cuando se presta)
     private boolean mayor18;
     
+    //constructores 
+    
     public Pelicula() {
         titulo = "";
         autor = "";
@@ -35,6 +37,8 @@ public class Pelicula {
         plazoEntrega = 0;
         this.mayor18 = mayor18;
     }
+    
+    //metodos
 
     public boolean prestar() {
         if (copiasDisponibles > 0) {
@@ -57,6 +61,60 @@ public class Pelicula {
         plazoEntrega += dias;
     }
     
+    public void modificarDatosPelicula(String titulo, String autor, String genero, String estrenoYear, String copiasDisponibles, boolean mayor18)
+    {
+        if (titulo == null || titulo.trim().isEmpty()) {
+            titulo = getTitulo();
+        }
+        if(autor == null || autor.trim().isEmpty()) {
+            autor = getAutor();
+        }
+        if(genero == null || genero.trim().isEmpty()) {
+            genero = getGenero();
+        }
+        
+        this.titulo = titulo;
+        this.autor = autor;
+        this.genero = genero;
+        
+        if (estrenoYear != null && !estrenoYear.trim().isEmpty()) {
+            this.estrenoYear = Integer.parseInt(estrenoYear.trim());
+        }
+
+        if (copiasDisponibles != null && !copiasDisponibles.trim().isEmpty()) {
+            this.copiasDisponibles = Integer.parseInt(copiasDisponibles.trim());
+        }
+        
+        this.mayor18 = mayor18;
+
+    }
+    
+    public void modificarDatosPelicula(String titulo, String autor, String genero, String estrenoYear, String copiasDisponibles)
+    {
+        if (titulo == null || titulo.trim().isEmpty()) {
+            titulo = getTitulo();
+        }
+        if(autor == null || autor.trim().isEmpty()) {
+            autor = getAutor();
+        }
+        if(genero == null || genero.trim().isEmpty()) {
+            genero = getGenero();
+        }
+        
+        this.titulo = titulo;
+        this.autor = autor;
+        this.genero = genero;
+
+        if (estrenoYear != null && !estrenoYear.trim().isEmpty()) {
+            this.estrenoYear = Integer.parseInt(estrenoYear.trim());
+        }
+
+        if (copiasDisponibles != null && !copiasDisponibles.trim().isEmpty()) {
+            this.copiasDisponibles = Integer.parseInt(copiasDisponibles.trim());
+        }
+
+    }
+
     
     //getter y setters
 

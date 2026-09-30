@@ -484,5 +484,31 @@ public class SistemaVideoClub {
         return sb.toString();    
     }
 
+    public String modificarPelicula(int idBuscar, String titulo, String autor, String genero, String estrenoYear, String copiasDisponibles, boolean mayor18)
+    {
+        Pelicula p = busquedaBinariaPeliculas(idBuscar);
+        if(p == null)
+        {
+            return "La pelicula no existe";
+        }
+        p.modificarDatosPelicula(titulo, autor, genero, estrenoYear, copiasDisponibles, mayor18);
+        guardarDatos();
+        return "Pelicula modificada con exito";
+    }
+    
+
+
+    public String modificarPelicula(int idBuscar, String titulo, String autor, String genero, String estrenoYear, String copiasDisponibles)
+    {
+        Pelicula p = busquedaBinariaPeliculas(idBuscar);
+        if(p == null)
+        {
+            return "La pelicula no existe";
+        }
+        p.modificarDatosPelicula(titulo, autor, genero, estrenoYear, copiasDisponibles);
+        guardarDatos();
+        return "Pelicula modificada con exito";
+    }
     
 }
+
