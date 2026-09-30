@@ -124,7 +124,7 @@ public class SistemaVideoClub {
         if(mapaClientes.containsKey(key))
         {
             Cliente mostrar = mapaClientes.get(key);
-            return mostrar.identificarse();
+            return mostrarFicha(mostrar);
 
         }
         return "Cliente no existe";
@@ -355,12 +355,19 @@ public class SistemaVideoClub {
 
     }
     
+    public String mostrarFicha(Persona p)
+    {
+        String t = "\n=== DATOS ===";
+        t += p.identificarse();
+        return t;
+    }
+    
     public String mostrarEmpleado(String id)
     {
         if(mapaEmpleados.containsKey(id))
         {
             Encargado mostrar = mapaEmpleados.get(id);
-            return mostrar.identificarse();
+            return mostrarFicha(mostrar);
         }else return ("Empleado no existe");
 
     }
@@ -459,5 +466,23 @@ public class SistemaVideoClub {
         
         return sb.toString();    
     }
+    
+    public String mostrarTodosEmpleados()
+    {
+        if(mapaEmpleados.isEmpty())
+        {
+            return "\nNo hay empleados para mostrar\n";
+        }
+        StringBuilder sb = new StringBuilder();
+        sb.append("\n_________________________\n");
+        for (Encargado act : mapaEmpleados.values()) {
+            String mostrar = act.getIdEmpleado();
+            sb.append(mostrarEmpleado(mostrar))
+            .append("\n_________________________\n");
+        }
+        
+        return sb.toString();    
+    }
+
     
 }

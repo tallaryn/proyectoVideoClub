@@ -45,7 +45,7 @@ public class LecturaDatos {
         String rut = "";
         boolean esValido = false;
 
-        while (!esValido) {
+        while (!esValido && !rut.equals("0")) {
             try {
                 rut = lector.readLine();
                 
@@ -63,7 +63,7 @@ public class LecturaDatos {
         String idEmpleado = "";
         boolean esValido = false;
 
-        while (!esValido) {
+        while (!esValido && !idEmpleado.equals("0")) {
             try {
                 idEmpleado = lector.readLine();
                 Encargado.validarIdEmpleado(idEmpleado); 

@@ -19,6 +19,7 @@ public class SubMenuEmpleado {
             System.out.println("3 - Mostrar empleado");
             System.out.println("4 - Acciones empleado");
             System.out.println("5 - Editar empleado");
+            System.out.println("6 - Mostrar empleados");
             System.out.printf("Ingrese la opcion a elegir: ");
 
             opcion = LecturaDatos.getInt(lector);
@@ -108,6 +109,10 @@ public class SubMenuEmpleado {
 
                     System.out.println(sistema.editarEmpleado(idEmpleado, nombre, rutNuevo, turno, sueldoNuevo));
                     break;
+                    
+                case 6:
+                    System.out.println(sistema.mostrarTodosEmpleados());
+                    break;
 
                 case 0:
                     System.out.println("Saliendo...");
@@ -126,7 +131,7 @@ public class SubMenuEmpleado {
         String idEmpleado;
         do{
             System.out.printf("Ingrese ID de empleado (o digite '0' para cancelar): ");
-            idEmpleado = lector.readLine();
+            idEmpleado = LecturaDatos.leerIdEmpleado(lector);
     
             if (idEmpleado.equals("0")) {
                 System.out.println("Operación cancelada por el usuario.");
