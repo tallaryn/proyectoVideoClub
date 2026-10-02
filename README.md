@@ -12,7 +12,7 @@
 - Abre tu terminal o consola Git y ejecuta:
 ```bash
 
-git clone https://github.com/dizzineeess/videoClub
+git clone https://github.com/tallaryn/proyectoVideoClub/
 
 ```
 
@@ -30,15 +30,14 @@ git clone https://github.com/dizzineeess/videoClub
 #### Primer paso: Abrir el proyecto en NetBeans
 1. Abre Apache NetBeans.
 2. Ve al menú superior: `File` -> `Open Project...` (o presiona `Ctrl + Shift + O`).
-3. Navega hasta la carpeta donde clonaste o extrajiste el proyecto, selecciona la carpeta `videoClub` y haz clic en **Open Project**.
+3. Navega hasta la carpeta donde clonaste o extrajiste el proyecto, selecciona `proyectoVideoClub` y haz clic en **Open Project**.
 
 #### Segundo paso: Configurar la versión de Java (JDK 11)
-1. En el panel izquierdo de proyectos, haz clic derecho sobre `videoClub` y selecciona **Properties**.
+1. En el panel izquierdo de proyectos, haz clic derecho sobre el icono del proyecto y selecciona **Properties**.
 2. Ve a la categoría **Libraries**.
 3. En la opción **Java Platform**, asegúrate de tener seleccionado **JDK 11**.
 4. Haz clic en **OK**.
 
-#### Tercer paso: Iniciar la aplicación
-1. En el panel de proyectos, despliega `Source Packages` -> abre el paquete donde se encuentra la clase principal con el método `main` (por ejemplo, `Main.java`).
-2. Presiona la tecla **F6** o haz clic en el botón verde de **Play** (Run Project) en la barra de herramientas superior.
-3. La consola aparecerá en la parte inferior de NetBeans.
+#### Tercer paso: Ejecución
+1. Presiona la tecla **F6** o haz clic en el botón verde de **Play** (Run Project) en la barra de herramientas superior.
+2. La consola aparecerá en la parte inferior de NetBeans.
