@@ -33,6 +33,8 @@ public class VentanaPelicula extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         btnMostrarCatalogoActionPerformed = new javax.swing.JButton();
         btnAgregarPeliculaActionPerformed = new javax.swing.JButton();
+        btnBuscarPelicula = new javax.swing.JButton();
+        btnModificarPelicula = new javax.swing.JButton();
 
         btnQuitarPeliculaActionPerformed.setText("Quitar");
         btnQuitarPeliculaActionPerformed.addActionListener(this::btnQuitarPeliculaActionPerformedActionPerformed);
@@ -48,6 +50,12 @@ public class VentanaPelicula extends javax.swing.JPanel {
         btnAgregarPeliculaActionPerformed.setText("Agregar");
         btnAgregarPeliculaActionPerformed.addActionListener(this::btnAgregarPeliculaActionPerformedActionPerformed);
 
+        btnBuscarPelicula.setText("Buscar");
+        btnBuscarPelicula.addActionListener(this::btnBuscarPeliculaActionPerformed);
+
+        btnModificarPelicula.setText("Modificar");
+        btnModificarPelicula.addActionListener(this::btnModificarPeliculaActionPerformed);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -62,6 +70,10 @@ public class VentanaPelicula extends javax.swing.JPanel {
                         .addComponent(btnAgregarPeliculaActionPerformed, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(btnQuitarPeliculaActionPerformed, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(btnBuscarPelicula, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnModificarPelicula, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(btnMostrarCatalogoActionPerformed, javax.swing.GroupLayout.PREFERRED_SIZE, 308, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
@@ -74,6 +86,10 @@ public class VentanaPelicula extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAgregarPeliculaActionPerformed, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnQuitarPeliculaActionPerformed, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnBuscarPelicula, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnModificarPelicula, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(btnMostrarCatalogoActionPerformed, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -192,9 +208,102 @@ public class VentanaPelicula extends javax.swing.JPanel {
         JOptionPane.showMessageDialog(this, scrollPane, "Catalogo de Peliculas", JOptionPane.PLAIN_MESSAGE);
     }//GEN-LAST:event_btnMostrarCatalogoActionPerformedActionPerformed
 
+    private void btnBuscarPeliculaActionPerformed(java.awt.event.ActionEvent evt) {
+        String inputId = JOptionPane.showInputDialog(this, "Ingrese el ID de la pelicula:", "Buscar Pelicula", JOptionPane.QUESTION_MESSAGE);
+        if (inputId == null || inputId.trim().isEmpty()) {
+            return;
+        }
+        try {
+            int id = Integer.parseInt(inputId.trim());
+            Pelicula pelicula = sistema.busquedaBinariaPeliculas(id);
+            if (pelicula == null) {
+                JOptionPane.showMessageDialog(this, "No se encontro la pelicula.", "Buscar Pelicula", JOptionPane.INFORMATION_MESSAGE);
+                return;
+            }
+            String datos = "ID: " + pelicula.getIdPelicula()
+                    + "\nTitulo: " + pelicula.getTitulo()
+                    + "\nAutor: " + pelicula.getAutor()
+                    + "\nGenero: " + pelicula.getGenero()
+                    + "\nAnio: " + pelicula.getEstrenoYear()
+                    + "\nCopias disponibles: " + pelicula.getCopiasDisponibles()
+                    + "\nRestriccion +18: " + (pelicula.isMayor18() ? "Si" : "No");
+            JOptionPane.showMessageDialog(this, datos, "Pelicula encontrada", JOptionPane.INFORMATION_MESSAGE);
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "El ID debe ser un numero entero valido.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    private void btnModificarPeliculaActionPerformed(java.awt.event.ActionEvent evt) {
+        String inputId = JOptionPane.showInputDialog(this, "Ingrese el ID de la pelicula a modificar:", "Modificar Pelicula", JOptionPane.QUESTION_MESSAGE);
+        if (inputId == null || inputId.trim().isEmpty()) {
+            return;
+        }
+
+        Pelicula pelicula;
+        try {
+            int id = Integer.parseInt(inputId.trim());
+            pelicula = sistema.busquedaBinariaPeliculas(id);
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "El ID debe ser un numero entero valido.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        if (pelicula == null) {
+            JOptionPane.showMessageDialog(this, "No se encontro la pelicula.", "Modificar Pelicula", JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
+
+        JTextField tituloField = new JTextField(pelicula.getTitulo(), 20);
+        JTextField autorField = new JTextField(pelicula.getAutor(), 20);
+        JTextField generoField = new JTextField(pelicula.getGenero(), 20);
+        JTextField anioField = new JTextField(String.valueOf(pelicula.getEstrenoYear()), 20);
+        JTextField copiasField = new JTextField(String.valueOf(pelicula.getCopiasDisponibles()), 20);
+        JCheckBox mayor18Check = new JCheckBox("Restriccion de edad (+18)", pelicula.isMayor18());
+
+        JPanel formulario = new JPanel(new GridLayout(0, 2, 8, 8));
+        formulario.add(new JLabel("Titulo:"));
+        formulario.add(tituloField);
+        formulario.add(new JLabel("Autor:"));
+        formulario.add(autorField);
+        formulario.add(new JLabel("Genero:"));
+        formulario.add(generoField);
+        formulario.add(new JLabel("Anio de publicacion:"));
+        formulario.add(anioField);
+        formulario.add(new JLabel("Copias disponibles:"));
+        formulario.add(copiasField);
+        formulario.add(new JLabel(""));
+        formulario.add(mayor18Check);
+
+        int opcion = JOptionPane.showConfirmDialog(this, formulario, "Modificar Pelicula", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
+        if (opcion != JOptionPane.OK_OPTION) {
+            return;
+        }
+
+        try {
+            if (!anioField.getText().trim().isEmpty()) {
+                Integer.parseInt(anioField.getText().trim());
+            }
+            if (!copiasField.getText().trim().isEmpty()) {
+                Integer.parseInt(copiasField.getText().trim());
+            }
+            String resultado = sistema.modificarPelicula(
+                    pelicula.getIdPelicula(),
+                    tituloField.getText(),
+                    autorField.getText(),
+                    generoField.getText(),
+                    anioField.getText(),
+                    copiasField.getText(),
+                    mayor18Check.isSelected());
+            JOptionPane.showMessageDialog(this, resultado, "Modificar Pelicula", JOptionPane.INFORMATION_MESSAGE);
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Anio y copias deben ser numeros enteros validos.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregarPeliculaActionPerformed;
+    private javax.swing.JButton btnBuscarPelicula;
     private javax.swing.JButton btnMostrarCatalogoActionPerformed;
+    private javax.swing.JButton btnModificarPelicula;
     private javax.swing.JButton btnQuitarPeliculaActionPerformed;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
